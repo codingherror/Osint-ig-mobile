@@ -1,185 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="OSINT Mobile Panel for profile analysis and engagement tracking" />
-  <meta name="author" content="Your Name" />
-  <meta name="keywords" content="OSINT, profile analysis, social media, engagement" />
-  <title>OSINT Mobile Panel</title>
-  <!-- Favicon (optional, add your favicon.ico to the repository root) -->
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <!-- Font Awesome CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh6Jx1vBa0+0g0zvG2j/x" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <style>
-    :root {
-      color-scheme: light dark;
-      --bg-light: #e0e5ec;
-      --bg-dark: #1c1f26;
-      --shadow-light: #ffffff;
-      --shadow-dark: #a3b1c6;
-      --shadow-dark-mode: #0e1014;
-      --accent: #5c6ac4;
-    }
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: var(--bg-light);
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    @media (prefers-color-scheme: dark) {
-      body {
-        background: var(--bg-dark);
-        color: #ddd;
-      }
-    }
-    .container {
-      padding: 1rem;
-      flex: 1;
-      overflow-y: auto;
-    }
-    .card {
-      background: inherit;
-      border-radius: 20px;
-      box-shadow: 8px 8px 15px var(--shadow-dark), -8px -8px 15px var(--shadow-light);
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .card h3 {
-      margin-top: 0;
-      font-size: 1.2rem;
-    }
-    .gauge-bar {
-      background: inherit;
-      border-radius: 12px;
-      box-shadow: inset 6px 6px 10px var(--shadow-dark), inset -6px -6px 10px var(--shadow-light);
-      overflow: hidden;
-      height: 16px;
-      margin-top: 0.5rem;
-    }
-    .gauge-fill {
-      height: 100%;
-      background: var(--accent);
-      border-radius: 12px 0 0 12px;
-      animation: fillGauge 2s ease-out;
-    }
-    @keyframes fillGauge {
-      0% { width: 0; }
-      100% { width: inherit; }
-    }
-    .bottom-nav {
-      display: flex;
-      justify-content: space-around;
-      background: inherit;
-      box-shadow: 0 -6px 15px var(--shadow-dark), 0 -2px 5px var(--shadow-light);
-      padding: 0.75rem 0;
-      border-radius: 20px 20px 0 0;
-      position: sticky;
-      bottom: 0;
-    }
-    .nav-item {
-      font-size: 0.9rem;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .nav-item i {
-      font-size: 1.4rem;
-      margin-bottom: 0.2rem;
-    }
-    .status-panel {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      background: inherit;
-      border-radius: 12px;
-      padding: 0.8rem;
-      box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
-      font-size: 0.8rem;
-      z-index: 1000;
-    }
-    .status-panel span {
-      display: block;
-      margin-bottom: 0.2rem;
-    }
-    .progress-bar {
-      width: 100%;
-      background-color: #ccc;
-      border-radius: 10px;
-      overflow: hidden;
-      height: 10px;
-      margin-top: 5px;
-    }
-    .progress-fill {
-      height: 100%;
-      background-color: var(--accent);
-      width: 66%;
-      animation: loadingBar 4s infinite alternate ease-in-out;
-    }
-    @keyframes loadingBar {
-      0% { width: 0%; }
-      100% { width: 90%; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT Instagram Report - @exampleuser</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #1a2a3a;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        section {
+            margin-bottom: 40px;
+        }
+        h2 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            color: #1a2a3a;
+        }
+        .gauge {
+            width: 100%;
+            background-color: #eee;
+            border-radius: 5px;
+            height: 20px;
+            position: relative;
+            margin: 10px 0;
+        }
+        .gauge-fill {
+            height: 100%;
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        .gauge-label {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-weight: bold;
+        }
+        .scraper-health {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .node {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100px;
+        }
+        .node.active {
+            background-color: #4caf50;
+            color: #fff;
+        }
+        .node.inactive {
+            background-color: #f44336;
+            color: #fff;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #1a2a3a;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+        .nav-btn {
+            background-color: #334455;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .nav-btn:hover {
+            background-color: #445566;
+        }
+        #results-panel, #user-panel {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background: #fff;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+            padding: 20px;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+        #results-panel.open, #user-panel.open {
+            right: 0;
+        }
+        .close-btn {
+            float: right;
+            cursor: pointer;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button[type="submit"] {
+            background-color: #1a2a3a;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+        }
+        /* Progress bar colors */
+        .progress-85 { width: 85%; background-color: #4caf50; }
+        .progress-70 { width: 70%; background-color: #2196f3; }
+        .progress-95 { width: 95%; background-color: #ff9800; }
+    </style>
 </head>
 <body>
-  <!-- Status Panel -->
-  <div class="status-panel">
-    <span>🛰️ Active Nodes: 3</span>
-    <span>📡 Scraping: instagram.com/@target</span>
-    <div class="progress-bar">
-      <div class="progress-fill"></div>
+    <header>
+        <h1>OSINT Instagram Intelligence Report</h1>
+        <p>Target: @exampleuser | Generated: August 02, 2025 | Report ID: OSINT-2025-001</p>
+    </header>
+
+    <div class="container">
+        <section id="exec-summary">
+            <h2>Executive Summary</h2>
+            <p>This report provides a comprehensive analysis of the Instagram profile @exampleuser, scraped using 3 active nodes. Key findings include high engagement in travel content and potential collaborations with brands. Risk level: Low.</p>
+            <div class="gauge">
+                <div class="gauge-fill progress-85"></div>
+                <span class="gauge-label">Profile Load: 85%</span>
+            </div>
+        </section>
+
+        <section id="profile-details">
+            <h2>Profile Details</h2>
+            <ul>
+                <li>Bio: Adventure seeker and photographer.</li>
+                <li>Followers: 12,500 | Following: 450</li>
+                <li>Posts: 320 | Reels: 45 | Stories Archived: 120</li>
+            </ul>
+            <div class="gauge">
+                <div class="gauge-fill progress-95"></div>
+                <span class="gauge-label">Data Completeness: 95%</span>
+            </div>
+        </section>
+
+        <section id="content-analysis">
+            <h2>Content Analysis</h2>
+            <p>Sentiment: Mostly positive (78%). Themes: Travel (45%), Lifestyle (30%).</p>
+            <div class="gauge">
+                <div class="gauge-fill progress-70"></div>
+                <span class="gauge-label">Analysis Progress: 70%</span>
+            </div>
+        </section>
+
+        <section id="network-mapping">
+            <h2>Network Mapping</h2>
+            <p>Top interactions: @brandpartner (15 mentions), @friendaccount (10 likes).</p>
+            <!-- Placeholder for graph; in real app, use Canvas or D3.js -->
+            <canvas id="network-graph" width="400" height="200" style="border:1px solid #ddd;"></canvas>
+        </section>
+
+        <section id="scraper-status">
+            <h2>Scraper Health</h2>
+            <div class="scraper-health">
+                <div class="node active">Node 1: Active</div>
+                <div class="node active">Node 2: Active</div>
+                <div class="node active">Node 3: Active</div>
+                <div class="node inactive">Node 4: Offline</div>
+                <div class="node inactive">Node 5: Offline</div>
+            </div>
+            <p>Active Nodes: 3/5 | Uptime: 98% | Last Sync: 5 minutes ago</p>
+        </section>
+
+        <!-- Additional sections like Geolocation, Engagement, etc., can be added similarly -->
     </div>
-  </div>
-  <!-- Main Content -->
-  <div class="container">
-    <div class="card">
-      <h3>Profile Summary</h3>
-      <p><strong>Username:</strong> @username</p>
-      <p><strong>Followers:</strong> 4,233</p>
-      <p><strong>Account Type:</strong> Personal</p>
+
+    <div class="bottom-nav">
+        <button class="nav-btn" onclick="togglePanel('results')">Results Panel</button>
+        <button class="nav-btn" onclick="togglePanel('user')">User Panel</button>
     </div>
-    <div class="card">
-      <h3>Engagement</h3>
-      <p>Engagement Rate: 4.6%</p>
-      <div class="gauge-bar">
-        <div class="gauge-fill" style="width: 46%;"></div>
-      </div>
+
+    <div id="results-panel">
+        <span class="close-btn" onclick="togglePanel('results')">&times;</span>
+        <h3>Results Panel</h3>
+        <ul>
+            <li><a href="#exec-summary">Executive Summary</a></li>
+            <li><a href="#profile-details">Profile Details</a></li>
+            <li><a href="#content-analysis">Content Analysis</a></li>
+            <li><a href="#network-mapping">Network Mapping</a></li>
+            <li>Export Report (PDF/CSV)</li>
+        </ul>
     </div>
-    <div class="card">
-      <h3>Risk Level</h3>
-      <p>Medium Risk Detected</p>
-      <div class="gauge-bar">
-        <div class="gauge-fill" style="width: 52%; background: orange;"></div>
-      </div>
+
+    <div id="user-panel">
+        <span class="close-btn" onclick="togglePanel('user')">&times;</span>
+        <h3>User Panel</h3>
+        <p>Tokens Remaining: 5</p>
+        <form>
+            <label for="token">Add Token:</label>
+            <input type="text" id="token" placeholder="Enter API Token or Session Key">
+            <button type="submit">Submit</button>
+        </form>
     </div>
-    <div class="card">
-      <h3>Behavior Summary</h3>
-      <p>Posts suggest travel influencer pattern, mild signs of automation.</p>
-    </div>
-  </div>
-  <!-- Bottom Navigation -->
-  <div class="bottom-nav">
-    <div class="nav-item">
-      <i class="fas fa-user"></i>
-      <span>Profile</span>
-    </div>
-    <div class="nav-item">
-      <i class="fas fa-chart-line"></i>
-      <span>Report</span>
-    </div>
-    <div class="nav-item">
-      <i class="fas fa-plus-circle"></i>
-      <span>New</span>
-    </div>
-    <div class="nav-item">
-      <i class="fas fa-cog"></i>
-      <span>Settings</span>
-    </div>
-  </div>
+
+    <script>
+        function togglePanel(panel) {
+            const results = document.getElementById('results-panel');
+            const user = document.getElementById('user-panel');
+            if (panel === 'results') {
+                results.classList.toggle('open');
+                user.classList.remove('open');
+            } else if (panel === 'user') {
+                user.classList.toggle('open');
+                results.classList.remove('open');
+            }
+        }
+
+        // Mock network graph drawing
+        const ctx = document.getElementById('network-graph').getContext('2d');
+        ctx.beginPath();
+        ctx.arc(200, 100, 50, 0, 2 * Math.PI);
+        ctx.stroke();
+        ctx.fillText('Network Placeholder', 150, 100);
+    </script>
 </body>
 </html>
