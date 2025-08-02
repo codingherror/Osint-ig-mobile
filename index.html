@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="OSINT Mobile Panel for profile analysis and engagement tracking" />
+  <meta name="author" content="Your Name" />
+  <meta name="keywords" content="OSINT, profile analysis, social media, engagement" />
+  <title>OSINT Mobile Panel</title>
+  <!-- Favicon (optional, add your favicon.ico to the repository root) -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh6Jx1vBa0+0g0zvG2j/x" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg-light: #e0e5ec;
+      --bg-dark: #1c1f26;
+      --shadow-light: #ffffff;
+      --shadow-dark: #a3b1c6;
+      --shadow-dark-mode: #0e1014;
+      --accent: #5c6ac4;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg-light);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: var(--bg-dark);
+        color: #ddd;
+      }
+    }
+    .container {
+      padding: 1rem;
+      flex: 1;
+      overflow-y: auto;
+    }
+    .card {
+      background: inherit;
+      border-radius: 20px;
+      box-shadow: 8px 8px 15px var(--shadow-dark), -8px -8px 15px var(--shadow-light);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .card h3 {
+      margin-top: 0;
+      font-size: 1.2rem;
+    }
+    .gauge-bar {
+      background: inherit;
+      border-radius: 12px;
+      box-shadow: inset 6px 6px 10px var(--shadow-dark), inset -6px -6px 10px var(--shadow-light);
+      overflow: hidden;
+      height: 16px;
+      margin-top: 0.5rem;
+    }
+    .gauge-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 12px 0 0 12px;
+      animation: fillGauge 2s ease-out;
+    }
+    @keyframes fillGauge {
+      0% { width: 0; }
+      100% { width: inherit; }
+    }
+    .bottom-nav {
+      display: flex;
+      justify-content: space-around;
+      background: inherit;
+      box-shadow: 0 -6px 15px var(--shadow-dark), 0 -2px 5px var(--shadow-light);
+      padding: 0.75rem 0;
+      border-radius: 20px 20px 0 0;
+      position: sticky;
+      bottom: 0;
+    }
+    .nav-item {
+      font-size: 0.9rem;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .nav-item i {
+      font-size: 1.4rem;
+      margin-bottom: 0.2rem;
+    }
+    .status-panel {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: inherit;
+      border-radius: 12px;
+      padding: 0.8rem;
+      box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+      font-size: 0.8rem;
+      z-index: 1000;
+    }
+    .status-panel span {
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+    .progress-bar {
+      width: 100%;
+      background-color: #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 10px;
+      margin-top: 5px;
+    }
+    .progress-fill {
+      height: 100%;
+      background-color: var(--accent);
+      width: 66%;
+      animation: loadingBar 4s infinite alternate ease-in-out;
+    }
+    @keyframes loadingBar {
+      0% { width: 0%; }
+      100% { width: 90%; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Status Panel -->
+  <div class="status-panel">
+    <span>🛰️ Active Nodes: 3</span>
+    <span>📡 Scraping: instagram.com/@target</span>
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
+    </div>
+  </div>
+  <!-- Main Content -->
+  <div class="container">
+    <div class="card">
+      <h3>Profile Summary</h3>
+      <p><strong>Username:</strong> @username</p>
+      <p><strong>Followers:</strong> 4,233</p>
+      <p><strong>Account Type:</strong> Personal</p>
+    </div>
+    <div class="card">
+      <h3>Engagement</h3>
+      <p>Engagement Rate: 4.6%</p>
+      <div class="gauge-bar">
+        <div class="gauge-fill" style="width: 46%;"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Risk Level</h3>
+      <p>Medium Risk Detected</p>
+      <div class="gauge-bar">
+        <div class="gauge-fill" style="width: 52%; background: orange;"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Behavior Summary</h3>
+      <p>Posts suggest travel influencer pattern, mild signs of automation.</p>
+    </div>
+  </div>
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav">
+    <div class="nav-item">
+      <i class="fas fa-user"></i>
+      <span>Profile</span>
+    </div>
+    <div class="nav-item">
+      <i class="fas fa-chart-line"></i>
+      <span>Report</span>
+    </div>
+    <div class="nav-item">
+      <i class="fas fa-plus-circle"></i>
+      <span>New</span>
+    </div>
+    <div class="nav-item">
+      <i class="fas fa-cog"></i>
+      <span>Settings</span>
+    </div>
+  </div>
+</body>
+</html>
